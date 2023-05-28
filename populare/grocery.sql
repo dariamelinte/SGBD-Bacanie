@@ -17,7 +17,7 @@ CREATE TABLE groceries (
 CREATE TABLE sell_types (
   id INT NOT NULL PRIMARY KEY,
   name VARCHAR2(255) NOT NULL,
-  CONSTRAINT no_duplicates UNIQUE (name)
+  CONSTRAINT no_duplicates_sell_type UNIQUE (name)
 );
 
 CREATE TABLE product_groceries (
@@ -40,7 +40,8 @@ CREATE TABLE category_grocery_products (
 
 INSERT INTO groceries (name, id_user) VALUES ('Prima mea bacanie', 1), ('A 2a mea bacanie', 1), ('A 3a mea bacanie', 1);
 
-INSERT INTO sell_types (name) VALUES ('Per piece'), ('Per 100g');
+INSERT INTO sell_types (id, name) VALUES (1, 'Per piece');
+INSERT INTO sell_types (id, name) VALUES (2, 'Per 100g');
 
 INSERT INTO product_groceries (id_grocery, id_product, id_sell_type) VALUES
 	(1, 1, 2), (2, 1, 2), (3, 1, 2), (1, 2, 2), (2, 2, 2), (3, 2, 2), (1, 3, 2), (1, 4, 2), (1, 5, 2), (1, 6, 1), (1, 7, 1), (1, 8, 1), (1, 9, 1), (1, 10, 1), (1, 11, 1);

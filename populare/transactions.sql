@@ -5,7 +5,7 @@ CREATE TABLE tranzaction_types (
   id INT NOT NULL PRIMARY KEY,
   name VARCHAR2(255) NOT NULL,
 
-  CONSTRAINT no_duplicates_t1 UNIQUE (name)
+  CONSTRAINT no_duplicates_tranz_types UNIQUE (name)
 );
 
 CREATE TABLE tranzactions (
