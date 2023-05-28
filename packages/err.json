@@ -1,0 +1,32 @@
+[
+  {
+    "NAME": "CRUD_ROLES_PKG",
+    "TYPE": "PACKAGE BODY",
+    "SEQUENCE": "1",
+    "LINE": "5",
+    "POSITION": "10",
+    "TEXT": "PLS-00103: Encountered the symbol \"IN\" when expecting one of the following:\n\n   constant exception <an identifier>\n   <a double-quoted delimited-identifier> table long double ref\n   char time timestamp interval date binary national character\n   nchar\n",
+    "ATTRIBUTE": "ERROR",
+    "MESSAGE_NUMBER": "103"
+  },
+  {
+    "NAME": "CRUD_ROLES_PKG",
+    "TYPE": "PACKAGE BODY",
+    "SEQUENCE": "2",
+    "LINE": "5",
+    "POSITION": "26",
+    "TEXT": "PLS-00103: Encountered the symbol \";\" when expecting one of the following:\n\n   . ( * @ % & - + / at loop mod remainder rem ..\n   <an exponent (**)> || multiset\n",
+    "ATTRIBUTE": "ERROR",
+    "MESSAGE_NUMBER": "103"
+  },
+  {
+    "NAME": "CRUD_ROLES_PKG",
+    "TYPE": "PACKAGE BODY",
+    "SEQUENCE": "3",
+    "LINE": "15",
+    "POSITION": "3",
+    "TEXT": "PLS-00103: Encountered the symbol \"END\" when expecting one of the following:\n\n   ( begin case declare exit for goto if loop mod null pragma\n   raise return select update while with <an identifier>\n   <a double-quoted delimited-identifier> <a bind variable> <<\n   continue close current delete fetch lock insert open rollback\n   savepoint set sql execute commit forall merge pipe purge\n",
+    "ATTRIBUTE": "ERROR",
+    "MESSAGE_NUMBER": "103"
+  }
+]

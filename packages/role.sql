@@ -1,80 +1,116 @@
-CREATE OR REPLACE PACKAGE roles_pkg IS
-  duplicate_role_exception EXCEPTION;
-  role_not_found_exception EXCEPTION;
-
+CREATE OR REPLACE PACKAGE crud_roles_pkg IS
   PROCEDURE create_role(
-    p_name IN VARCHAR2
+    p_name IN roles.name%TYPE
   );
-
-  FUNCTION get_role(p_id IN NUMBER) RETURN roles%ROWTYPE;
-
+  
+  FUNCTION read_role(p_id IN roles.id%TYPE) RETURN roles%ROWTYPE;
+  
   PROCEDURE update_role(
-    p_id IN NUMBER,
-    p_name IN VARCHAR2
+    p_id IN roles.id%TYPE,
+    p_name IN roles.name%TYPE
   );
-
-  PROCEDURE delete_role(p_id IN NUMBER);
-
-END roles_pkg;
+  
+  PROCEDURE delete_role(p_id IN roles.id%TYPE);
+END crud_roles_pkg;
 /
 
-CREATE OR REPLACE PACKAGE BODY roles_pkg IS
-  duplicate_role_exception EXCEPTION;
-  PRAGMA EXCEPTION_INIT(duplicate_role_exception, -20001);
+SELECT *
+FROM SYS_ERRORS
+WHERE NAME = 'CRUD_ROLES_PKG';
 
-  role_not_found_exception EXCEPTION;
-  PRAGMA EXCEPTION_INIT(role_not_found_exception, -20002);
-
-  PROCEDURE create_role(
-    p_name IN VARCHAR2
+CREATE OR REPLACE PACKAGE BODY crud_roles_pkg IS
+  PROCEDURE create_role (
+    p_name IN roles.name%TYPE
   ) IS
-    v_id INT
+    v_id roles.id%TYPE;
+    role_count NUMBER := 0;
   BEGIN
+    SELECT COUNT(*) INTO role_count FROM roles WHERE name = p_name;
+    IF role_count > 0 THEN
+      RAISE exception_pkg.already_exists_exception;
+    END IF;
+
     select count(*) into v_id from roles;
-    INSERT INTO roles (id, name)
-    VALUES (v_id, p_name);
-  EXCEPTION
-    WHEN DUP_VAL_ON_INDEX THEN
-      RAISE_APPLICATION_ERROR(-20001, 'Role already exists.');
+    INSERT INTO roles(id, name) VALUES (v_id + 1, p_name);
   END create_role;
 
-  FUNCTION get_role(p_id IN NUMBER) RETURN roles%ROWTYPE IS
-    role roles%ROWTYPE;
+  FUNCTION read_role(p_id IN roles.id%TYPE) RETURN roles%ROWTYPE IS
+    l_role roles%ROWTYPE;
+    row_count NUMBER;
   BEGIN
-    SELECT *
-    INTO role
-    FROM roles
-    WHERE id = p_id;
+    SELECT count(*) into row_count from roles where id = p_id;
+    if row_count = 0 then 
+      RAISE exception_pkg.record_not_found_exception;
+    end if;
 
-    RETURN role;
-  EXCEPTION
-    WHEN NO_DATA_FOUND THEN
-      RAISE_APPLICATION_ERROR(-20002, 'Role not found.');
-  END get_role;
+    SELECT * INTO l_role FROM roles WHERE id = p_id;
+    RETURN l_role;
+  END read_role;
 
   PROCEDURE update_role(
-    p_id IN NUMBER,
-    p_name IN VARCHAR2
+    p_id IN roles.id%TYPE,
+    p_name IN roles.name%TYPE
   ) IS
+    row_count NUMBER;
   BEGIN
-    UPDATE roles
-    SET name = p_name
-    WHERE id = p_id;
+    SELECT count(*) into row_count from roles where id = p_id;
+    if row_count = 0 then 
+      RAISE exception_pkg.record_not_found_exception;
+    end if;
 
-    IF SQL%ROWCOUNT = 0 THEN
-      RAISE_APPLICATION_ERROR(-20002, 'Role not found.');
-    END IF;
+    UPDATE roles SET name = p_name WHERE id = p_id;
   END update_role;
 
-  PROCEDURE delete_role(p_id IN NUMBER) IS
+  PROCEDURE delete_role(p_id IN roles.id%TYPE) IS
+    row_count NUMBER;
   BEGIN
-    DELETE FROM roles
-    WHERE id = p_id;
+    SELECT count(*) into row_count from roles where id = p_id;
+    if row_count = 0 then 
+      RAISE exception_pkg.record_not_found_exception;
+    end if;
 
-    IF SQL%ROWCOUNT = 0 THEN
-      RAISE_APPLICATION_ERROR(-20002, 'Role not found.');
-    END IF;
+    DELETE FROM roles WHERE id = p_id;
   END delete_role;
-
-END roles_pkg;
+END crud_roles_pkg;
 /
+
+
+BEGIN
+  crud_roles_pkg.create_role('role');
+
+  EXCEPTION
+  when exception_pkg.already_exists_exception THEN
+    dbms_output.put_line('Role already exists');
+END;
+
+
+DECLARE
+  l_role roles%ROWTYPE;
+BEGIN
+  l_role := crud_roles_pkg.read_role(4);
+
+  dbms_output.put_line(l_role.id || ' ' || l_role.name);
+
+  EXCEPTION
+  when exception_pkg.record_not_found_exception THEN
+    dbms_output.put_line('Role not found');
+END;
+/
+
+BEGIN
+  crud_roles_pkg.update_role(4, 'Updated Role');
+
+
+  EXCEPTION
+  when exception_pkg.record_not_found_exception THEN
+    dbms_output.put_line('Role not found');
+END;
+/
+
+BEGIN
+  crud_roles_pkg.delete_role(4);
+
+  EXCEPTION
+  when exception_pkg.record_not_found_exception THEN
+    dbms_output.put_line('Role not found');
+END;

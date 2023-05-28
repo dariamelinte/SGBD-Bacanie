@@ -1,16 +1,17 @@
-DROP TABLE IF EXISTS groceries CASCADE;
-DROP TABLE IF EXISTS grocery_products CASCADE;
-DROP TABLE IF EXISTS sell_types CASCADE;
-DROP TABLE IF EXISTS category_grocery_products CASCADE;
+DROP TABLE groceries CASCADE CONSTRAINTS;
+DROP TABLE grocery_products CASCADE CONSTRAINTS;
+DROP TABLE sell_types CASCADE CONSTRAINTS;
+DROP TABLE category_grocery_products CASCADE CONSTRAINTS;
+
 
 CREATE TABLE groceries (
   id INT NOT NULL PRIMARY KEY,
   id_user INT NOT NULL,
   name VARCHAR2(255) NOT NULL,
-  lat FLOAT NOT NULL,
-  long FLOAT NOT NULL,
+  latitude FLOAT NOT NULL,
+  longitude FLOAT NOT NULL,
   CONSTRAINT fk_groceries_id_user FOREIGN KEY (id_user) REFERENCES users(id),
-  CONSTRAINT no_duplicates UNIQUE (name)
+  CONSTRAINT no_duplicates_groceries UNIQUE (name)
 );
 
 CREATE TABLE sell_types (
