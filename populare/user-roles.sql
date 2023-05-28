@@ -16,7 +16,7 @@ CREATE TABLE users (
   phone_number VARCHAR2(255) NOT NULL,
   birth_date DATE NOT NULL,
   hashed_password VARCHAR2(255) NOT NULL,
-  jwt VARCHAR2(255) NOT NULL,
+  jwt VARCHAR2(255),
   CONSTRAINT no_duplicates_users UNIQUE (email)
 );
 
