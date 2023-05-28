@@ -43,6 +43,7 @@ VALUES (3, 'Bob', 'Smith', 'bob.smith@example.com', '5551234567', TO_DATE('28-08
 INSERT INTO user_roles (id, id_role, id_user, is_confirmed) VALUES (1, 2, 1, 0); 
 INSERT INTO user_roles (id, id_role, id_user, is_confirmed) VALUES (2, 3, 2, 1);
 INSERT INTO user_roles (id, id_role, id_user, is_confirmed) VALUES (3, 1, 3, 1);
+INSERT INTO user_roles (id, id_role, id_user, is_confirmed) VALUES (4, 3, 1, 0); 
 
 select * from roles;
 
