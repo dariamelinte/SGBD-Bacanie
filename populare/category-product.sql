@@ -1,6 +1,5 @@
 DROP TABLE categories CASCADE CONSTRAINTS;
 DROP TABLE products CASCADE CONSTRAINTS;
-DROP TABLE product_categories CASCADE CONSTRAINTS;
 
 CREATE TABLE categories (
   id INT NOT NULL PRIMARY KEY,
@@ -12,7 +11,7 @@ CREATE TABLE products (
   id INT NOT NULL PRIMARY KEY,
   name VARCHAR2(255) NOT NULL,
   description VARCHAR2(255) NOT NULL,
-  CONSTRAINT no_duplicates_products UNIQUE (name)
+  CONSTRAINT no_duplicates_products UNIQUE (name, description)
 );
 
 
@@ -22,6 +21,7 @@ INSERT INTO categories (id, name) VALUES (3,'vegetables');
 INSERT INTO categories (id, name) VALUES (4,'dairy');
 
 INSERT INTO products (id,name, description) VALUES (1,'Apple', 'Fresh and juicy fruit');
+INSERT INTO products (id,name, description) VALUES (2,'Apple', 'green apples');
 INSERT INTO products (id,name, description) VALUES  (2,'Orange', 'Sweet and tangy fruit');
 INSERT INTO products (id,name, description) VALUES (3,'Banana', 'Soft and sweet fruit');
 INSERT INTO products (id,name, description) VALUES (4,'Carrot', 'Crunchy and nutritious vegetable');

@@ -12,9 +12,6 @@ CREATE OR REPLACE PACKAGE crud_roles_pkg IS
   
   PROCEDURE delete_role(p_id IN roles.id%TYPE);
 END crud_roles_pkg;
-/
-
-SELECT * FROM SYS_ERRORS WHERE NAME = 'CRUD_ROLES_PKG';
 
 CREATE OR REPLACE PACKAGE BODY crud_roles_pkg IS
   PROCEDURE create_role (
@@ -70,8 +67,6 @@ CREATE OR REPLACE PACKAGE BODY crud_roles_pkg IS
     DELETE FROM roles WHERE id = p_id;
   END delete_role;
 END crud_roles_pkg;
-/
-
 
 BEGIN
   crud_roles_pkg.create_role('role');
@@ -80,7 +75,6 @@ BEGIN
   when exception_pkg.already_exists_exception THEN
     dbms_output.put_line('Role already exists');
 END;
-
 
 DECLARE
   l_role roles%ROWTYPE;
@@ -93,7 +87,6 @@ BEGIN
   when exception_pkg.record_not_found_exception THEN
     dbms_output.put_line('Role not found');
 END;
-/
 
 BEGIN
   crud_roles_pkg.update_role(4, 'Updated Role');
@@ -103,7 +96,6 @@ BEGIN
   when exception_pkg.record_not_found_exception THEN
     dbms_output.put_line('Role not found');
 END;
-/
 
 BEGIN
   crud_roles_pkg.delete_role(4);
