@@ -103,6 +103,12 @@ CREATE OR REPLACE PACKAGE BODY crud_user_roles_pkg IS
   ) IS
     row_count NUMBER := 0;
   BEGIN
+    select count(*) into row_count from user_roles where id = p_id;
+
+    if row_count = 0 THEN
+      RAISE exception_pkg.record_not_found_exception;
+    end if;
+
     select count(*) into row_count from user_roles where id_role = p_id_role and id_user = p_id_user;
 
     if row_count > 0 THEN

@@ -53,6 +53,11 @@ CREATE OR REPLACE PACKAGE BODY crud_categories_pkg IS
       RAISE exception_pkg.record_not_found_exception;
     end if;
 
+    SELECT count(*) into row_count from categories where name = p_name;
+    if row_count > 0 then 
+      RAISE exception_pkg.already_exists_exception;
+    end if;
+
     UPDATE categories SET name = p_name WHERE id = p_id;
   END update_category;
 
@@ -86,6 +91,14 @@ BEGIN
   EXCEPTION
   when exception_pkg.record_not_found_exception THEN
     dbms_output.put_line('Category not found');
+END;
+
+BEGIN
+  crud_categories_pkg.update_category(4, 'food');
+
+  EXCEPTION
+  when exception_pkg.already_exists_exception THEN
+    dbms_output.put_line('Category already exists');
 END;
 
 BEGIN

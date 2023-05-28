@@ -47,10 +47,16 @@ CREATE OR REPLACE PACKAGE BODY crud_roles_pkg IS
     p_name IN roles.name%TYPE
   ) IS
     row_count NUMBER;
+    name_count NUMBER;
   BEGIN
     SELECT count(*) into row_count from roles where id = p_id;
     if row_count = 0 then 
       RAISE exception_pkg.record_not_found_exception;
+    end if;
+
+    SELECT count(*) into name_count from roles where name = p_name;
+    if name_count > 0 then 
+      RAISE exception_pkg.already_exists_exception;
     end if;
 
     UPDATE roles SET name = p_name WHERE id = p_id;
