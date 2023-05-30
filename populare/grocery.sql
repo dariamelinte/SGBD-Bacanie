@@ -35,8 +35,8 @@ CREATE TABLE category_grocery_products (
   id INT NOT NULL PRIMARY KEY,
   id_product_grocery INT NOT NULL,
   id_category INT NOT NULL,
-  CONSTRAINT fk_category_product_groceries_id_product_grocery FOREIGN KEY (id_product_grocery) REFERENCES product_groceries(id),
-  CONSTRAINT fk_category_product_groceries_id_category FOREIGN KEY (id_category) REFERENCES categories(id)
+  CONSTRAINT fk_cgp_id_product_grocery FOREIGN KEY (id_product_grocery) REFERENCES product_groceries(id),
+  CONSTRAINT fk_cgp_id_category FOREIGN KEY (id_category) REFERENCES categories(id)
 );
 
 INSERT INTO groceries (name, id_user) VALUES ('Prima mea bacanie', 1), ('A 2a mea bacanie', 1), ('A 3a mea bacanie', 1);
