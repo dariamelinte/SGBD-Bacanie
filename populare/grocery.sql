@@ -1,5 +1,5 @@
 DROP TABLE groceries CASCADE CONSTRAINTS;
-DROP TABLE grocery_products CASCADE CONSTRAINTS;
+DROP TABLE product_groceries CASCADE CONSTRAINTS;
 DROP TABLE sell_types CASCADE CONSTRAINTS;
 DROP TABLE category_grocery_products CASCADE CONSTRAINTS;
 
@@ -25,9 +25,10 @@ CREATE TABLE product_groceries (
   id_grocery INT NOT NULL,
   id_product INT NOT NULL,
   id_sell_type INT NOT NULL,
-  CONSTRAINT fk_product_groceries_id_grocery FOREIGN KEY (id_grocery) REFERENCES groceries(id),
-  CONSTRAINT fk_product_groceries_id_product FOREIGN KEY (id_product) REFERENCES products(id),
-  CONSTRAINT fk_product_groceries_id_sell_type FOREIGN KEY (id_sell_type) REFERENCES sell_types(id)
+  CONSTRAINT fk_prod_gr_id_grocery FOREIGN KEY (id_grocery) REFERENCES groceries(id),
+  CONSTRAINT fk_prod_gr_id_product FOREIGN KEY (id_product) REFERENCES products(id),
+  CONSTRAINT fk_prod_gr_id_sell_type FOREIGN KEY (id_sell_type) REFERENCES sell_types(id),
+  CONSTRAINT no_duplicates_prod_gr UNIQUE (id_grocery, id_product)
 );
 
 CREATE TABLE category_grocery_products (

@@ -1,0 +1,42 @@
+[
+  {
+    "NAME": "PG_VARRAY_TYPE",
+    "TYPE": "TYPE",
+    "SEQUENCE": "2",
+    "LINE": "0",
+    "POSITION": "0",
+    "TEXT": "PL/SQL: Compilation unit analysis terminated",
+    "ATTRIBUTE": "ERROR",
+    "MESSAGE_NUMBER": "0"
+  },
+  {
+    "NAME": "PRODUCT_GROCERY_VARRAY_TYPE",
+    "TYPE": "TYPE",
+    "SEQUENCE": "2",
+    "LINE": "0",
+    "POSITION": "0",
+    "TEXT": "PL/SQL: Compilation unit analysis terminated",
+    "ATTRIBUTE": "ERROR",
+    "MESSAGE_NUMBER": "0"
+  },
+  {
+    "NAME": "PG_VARRAY_TYPE",
+    "TYPE": "TYPE",
+    "SEQUENCE": "1",
+    "LINE": "1",
+    "POSITION": "38",
+    "TEXT": "PLS-00329: schema-level type has illegal reference to STUDENT.PRODUCT_GROCERIES",
+    "ATTRIBUTE": "ERROR",
+    "MESSAGE_NUMBER": "329"
+  },
+  {
+    "NAME": "PRODUCT_GROCERY_VARRAY_TYPE",
+    "TYPE": "TYPE",
+    "SEQUENCE": "1",
+    "LINE": "1",
+    "POSITION": "52",
+    "TEXT": "PLS-00329: schema-level type has illegal reference to STUDENT.PRODUCT_GROCERIES",
+    "ATTRIBUTE": "ERROR",
+    "MESSAGE_NUMBER": "329"
+  }
+]
