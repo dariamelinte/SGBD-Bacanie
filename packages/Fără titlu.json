@@ -1,0 +1,22 @@
+[
+  {
+    "NAME": "CRUD_GROCERIES_PKG",
+    "TYPE": "PACKAGE BODY",
+    "SEQUENCE": "1",
+    "LINE": "88",
+    "POSITION": "97",
+    "TEXT": "PL/SQL: ORA-00904: \"LONGITUDE\": invalid identifier",
+    "ATTRIBUTE": "ERROR",
+    "MESSAGE_NUMBER": "0"
+  },
+  {
+    "NAME": "CRUD_GROCERIES_PKG",
+    "TYPE": "PACKAGE BODY",
+    "SEQUENCE": "2",
+    "LINE": "88",
+    "POSITION": "5",
+    "TEXT": "PL/SQL: SQL Statement ignored",
+    "ATTRIBUTE": "ERROR",
+    "MESSAGE_NUMBER": "0"
+  }
+]

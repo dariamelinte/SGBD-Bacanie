@@ -11,7 +11,7 @@ CREATE TABLE groceries (
   latitude FLOAT NOT NULL,
   longitude FLOAT NOT NULL,
   CONSTRAINT fk_groceries_id_user FOREIGN KEY (id_user) REFERENCES users(id),
-  CONSTRAINT no_duplicates_groceries UNIQUE (name)
+  CONSTRAINT no_duplicates_groceries UNIQUE (name, latitude, longitude)
 );
 
 CREATE TABLE sell_types (
